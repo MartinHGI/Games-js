@@ -1,29 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Colorless</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HELPME!!!</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-image: url('./asets/MeinMenu.jpg'); 
+      background-size: cover;
+      background-position: center;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    #menu {
+      text-align: center;
+      background-color: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    #menu h1 {
+      margin: 0 0 10px;
+    }
+
+    #menu a {
+      text-decoration: none;
+      display: block;
+      padding: 10px;
+
+      color: #333;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin: 5px auto;
+    }
+  </style>
 </head>
 <body>
-    <div id="header">
-        <h1>Colorless</h1>
-        <div>
-            <label for="difficulty">Obt96nost:</label>
-            <select id="difficulty">
-                <option value="brainLess">BrainLess</option>
-                <option value="easy">Easy</option>
-                <option value="medium">Medium</option>
-                <option value="hard">Hard</option>
-                <option value="summer of69">Summer of69</option>
-                <option value="I'm Gonna Be 500 Miles">I'm Gonna Be 500 Miles</option>
-            </select>
-            <button onclick="startGame()">Spustit hru</button>
-        </div>
-    </div>
-    <div id="colorDisplay"></div>
-    <div id="gameContainer"></div>
-    <script src="script.js"></script>
+
+<div id="menu">
+  <h1>Futurleslonia</h1>
+  <a href="index_krizskov.html">křižškvorky</a>
+  <a href="index_collorless.html">Colorless</a>
+</div>
+
+
+
 </body>
 </html>
