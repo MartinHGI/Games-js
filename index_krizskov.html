@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>křižškvarky</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      background-image: url('./asets/krizskvarky.png'); 
+    }
+
+    #board {
+      display: grid;
+      grid-gap: 5px;
+      margin-top: 20px;
+    }
+
+    .cell {
+      width: 50px;
+      height: 50px;
+      font-size: 40px;
+      cursor: pointer;
+      border: 1px solid #ccc;
+      color: rgb(0, 255, 128);
+
+    
+    }
+    #header {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+}
+  </style>
+</head>
+<body>
+
+    <div id="header">
+        <h1>křižškvarky</h1>
+
+<label for="boardSize">Velikost pole: </label>
+<input type="number" id="boardSize" min="3" max="20" value="3">
+
+<label for="winCondition">Počet pro výhru: </label>
+<input type="number" id="winCondition" min="3" max="10" value="3">
+
+<button onclick="startGame()">Spustit hru</button>
+
+    </div>
+
+
+<div id="board"></div>
+
+    <script>
+  let currentPlayer = 'X';
+  let boardSize = 3;  // velikost pole
+  let winCondition = 3; // po4et kole4ek pro v7hru 
+  let board = [];
+  let gameActive = false;
+
+  const boardElement = document.getElementById('board');
+  const boardSizeInput = document.getElementById('boardSize');
+  const winConditionInput = document.getElementById('winCondition');
+
+  function startGame() {
+    boardSize = parseInt(boardSizeInput.value, 30) || 3;
+    winCondition = parseInt(winConditionInput.value, 10) || 3;
+    resetGame();
+  }
+
+  function resetGame() {
+    currentPlayer = 'X';
+    gameActive = true;
+    board = Array.from({ length: boardSize * boardSize }, () => '');
+    renderBoard();
+  }
+
+  function renderBoard() {
+    boardElement.innerHTML = '';
+    boardElement.style.gridTemplateColumns = `repeat(${boardSize}, 50px)`;
+
+    for (let i = 0; i < board.length; i++)          
+    {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      cell.dataset.index = i;
+
+      cell.addEventListener('click', handleCellClick);
+      boardElement.appendChild(cell);
+      cell.textContent = board[i];
+    }
+  }
+
+  function handleCellClick(event) {
+    const clickedCell = event.target;
+    const cellIndex = clickedCell.dataset.index;
+
+    if (board[cellIndex] === '' && gameActive) {
+      board[cellIndex] = currentPlayer;
+      clickedCell.textContent = currentPlayer;
+
+      if (checkWin()) 
+      {
+        alert(`Hráč ${currentPlayer} vyhrl`);
+        gameActive = false;
+      } else if (board.every(cell => cell !== '')) 
+      {
+        alert('remíza!');
+        gameActive = false;
+      } else 
+      {
+        currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+      }
+    }
+  }
+
+  function checkWin() {
+    const winningCombinations = [];
+    
+    // Řádky a sloupce
+
+
+    for (let i = 0; i < boardSize; i++) {
+      winningCombinations.push(Array.from({ length: winCondition }, (_, index) => i * boardSize + index)); // 5ady
+      winningCombinations.push(Array.from({ length: winCondition }, (_, index) => i + index * boardSize)); // SLOŮPce
+    }
+
+    // uhlopříčky
+
+
+    winningCombinations.push(Array.from({ length: winCondition }, (_, index) => index * (boardSize + 1))); // uhlopříčka pravá
+    winningCombinations.push(Array.from({ length: winCondition }, (_, index) => (index + 1) * (boardSize - 1))); // uhlopříčka
+
+    return winningCombinations.some(combination => {
+      return combination.some(index => board[index] !== currentPlayer) ? false : true;
+    });
+  }
+</script>
+
+</body>
+</html>
