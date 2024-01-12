@@ -2,6 +2,10 @@ body {
     font-family: Arial, sans-serif;
     text-align: center;
     margin: 0;
+    background-image: url('asets/teahub.io-best-hd-abstract-wallpapers-2475597.jpg'); 
+    background-size: cover;
+    background-position: center;
+    
 }
 
 #header {
